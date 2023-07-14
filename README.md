@@ -16,7 +16,8 @@ Backup your printer.cfg file just to be safe and add the macros in the example_p
 Save printer.cfg and restart klipper. You should now be able to go to the console and type "PUSH_TEST"
 
 ### Light Reading
-The original inspiration for this is the gcode_shell_command.py written by Eric Callahan. 
+The original inspiration for this is the gcode_shell_command.py written by Eric Callahan.
+
 [Original Post the led me down this rabbit hole]( https://www.teamfdm.com/forums/topic/816-howto-pushover-notifications-for-completed-prints-to-your-phone/)
 
 [More information on Eric’s gcode_shell_command.py]( https://github.com/th33xitus/kiauh/blob/master/docs/gcode_shell_command.md)
