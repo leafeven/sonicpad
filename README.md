@@ -1,4 +1,4 @@
-# sonicpad
+# Sonicpad
 Sonic pad scripts, well currently just the one script, the purpose of which is to allow sending pushover notifications from the Creality Sonic Pad. If some time in the future Creality adds apprise or some enterprising individual figures out how to install it, this script is obsolete as moonraker will be able to do everything this can without having to root and appears to have better hooks in to what is going on in the printer. 
 
 ### Prerequisites 
@@ -18,4 +18,5 @@ Save printer.cfg and restart klipper. You should now be able to go to the consol
 ### Light Reading
 The original inspiration for this is the gcode_shell_command.py written by Eric Callahan. 
 [Original Post the led me down this rabbit hole]( https://www.teamfdm.com/forums/topic/816-howto-pushover-notifications-for-completed-prints-to-your-phone/)
+
 [More information on Eric’s gcode_shell_command.py]( https://github.com/th33xitus/kiauh/blob/master/docs/gcode_shell_command.md)
