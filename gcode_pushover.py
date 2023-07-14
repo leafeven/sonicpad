@@ -7,7 +7,7 @@
 #
 # Note: bits of code taken directly from Eric Callahan's gcode_shell_command.py
 ### Imports ###################################################################
-from urllib3 import PoolManager
+import urllib3
 from io import BytesIO
 import logging
 
@@ -28,18 +28,18 @@ class PushoverNotifier:
 
         self.gcode.register_mux_command(
             'SEND_PUSHOVER_MESSAGE','CMD',self.name,
-            self.cmd_SEND_PUSHOVER_MESSAGE,
+            self.send_message,
             desc=self.HELP
         )
     
-    def cmd_SEND_PUSHOVER_MESSAGE(self,params):
+    def send_message(self,params):
         '''Send message to pushover'''
         title = params.get('TITLE','Test Message')
         message = params.get('MESSAGE','This is a test')
         priority = params.get('PRIORITY','0')
 
         try:
-            http = PoolManager()
+            http = urllib3.PoolManager()
 
             fields = {
                 'token':self.app_token,
@@ -50,17 +50,21 @@ class PushoverNotifier:
             }
 
             if self.attachment:
-                pic = BytesIO()
-                request = http.request('GET',self.attachment,preload_content=False)
-                while True:
-                    data = request.read(1000)
-                    if not data:
-                        break
-                    pic.write(data)
-                
-                if pic.getbuffer().nbytes > 0:
-                    fields['attachment'] = ('snapshot.jpg',pic.getbuffer(),'image/jpeg')
-                request.release_conn()
+                try:
+                    pic = BytesIO()
+                    request = http.request('GET',self.attachment,preload_content=False)
+                    while True:
+                        data = request.read(1000)
+                        if not data:
+                            break
+                        pic.write(data)
+                    
+                    if pic.getbuffer().nbytes > 0:
+                        fields['attachment'] = ('snapshot.jpg',pic.getbuffer(),'image/jpeg')
+                    request.release_conn()
+                except urllib3.exceptions.MaxRetryError:
+                    self.gcode.respond_info('Retry Error getting attachment')
+
             
             response = http.request('POST',self.URL,fields=fields)
             if self.verbose:
@@ -70,9 +74,9 @@ class PushoverNotifier:
             response.release_conn()
         
         
-        except Exception:
-            logging.exception('pushover_message: {%s} failed' % (self.name))
-            raise self.gcode.error("Error sending pushover message {%s}" % (self.name))
+        except Exception as e:
+            #logging.exception('pushover_message: {%s}' % (str(e)))
+            raise self.gcode.error("Error sending pushover message {%s}" % (str(e)))
 
 
 def load_config_prefix(config):
