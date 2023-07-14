@@ -28,11 +28,11 @@ class PushoverNotifier:
 
         self.gcode.register_mux_command(
             'SEND_PUSHOVER_MESSAGE','CMD',self.name,
-            self.send_message,
+            self.cmd_SEND_PUSHOVER_MESSAGE,
             desc=self.HELP
         )
     
-    def send_message(self,params):
+    def cmd_SEND_PUSHOVER_MESSAGE(self,params):
         '''Send message to pushover'''
         title = params.get('TITLE','Test Message')
         message = params.get('MESSAGE','This is a test')
