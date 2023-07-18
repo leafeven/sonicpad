@@ -7,7 +7,7 @@ First you will need to be able to login via ssh as root into your Sonic Pad. Cre
 ### Installation
 If you are choosing to continue, you can either ssh in to your sonic pad with something like putty or use WinSCP to copy the files to your sonic pad, choice is yours. 
 #### Putty
-1. ssh into your Sonic Pad then `cd /user/share/klipper/klippy/extras`
+1. ssh into your Sonic Pad then `cd /usr/share/klipper/klippy/extras`
 2. using vi make the file `vi gcode_pushover.py. press` "I" then paste in the text (right click in putty), then press esc, then type ":wq" to save and close the file.
 3. restart the Sonic Pad.
 
