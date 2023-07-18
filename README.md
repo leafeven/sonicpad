@@ -9,7 +9,8 @@ If you are choosing to continue, you can either ssh in to your sonic pad with so
 #### Putty
 1. ssh into your Sonic Pad then `cd /usr/share/klipper/klippy/extras`
 2. using vi make the file `vi gcode_pushover.py. press` "I" then paste in the text (right click in putty), then press esc, then type ":wq" to save and close the file.
-3. restart the Sonic Pad.
+3. change permissions on file to allow all permissions `chmod 777 gcode_pushover.py`
+4. restart the Sonic Pad.
 
 ### Printer.cfg 
 Backup your printer.cfg file just to be safe and add the macros in the example_printer.cfg, making sure to update the user token and app token with your tokens from pushover. if you don’t have a webcam attached to your Sonic pad remove the URL in the attach line. Update any of the SEND_PUSHOVER_MESSAGE lines, making sure the title and message strings are surrounded by double quotes ("")
